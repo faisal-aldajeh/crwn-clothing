@@ -1,9 +1,9 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import "./sign-up.styles.scss";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { auth ,createUserProfileDocumnet} from "../../firebase/firebase.utils";
+import { auth ,createUserProfileDocument} from "../../firebase/firebase.utils";
 
 
 class SignUp extends React.Component {
@@ -22,14 +22,14 @@ class SignUp extends React.Component {
         event.preventDefault();
 
         const {displayName, email, password, confirmPassword} = this.state;
-        if (password != confirmPassword)
+        if (password !== confirmPassword)
         {
             alert("password don't match");
             return;
         }
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email,password);
-            await createUserProfileDocumnet(user , { displayName });
+            await createUserProfileDocument(user , { displayName });
             this.setState({
                 displayName      : '',
                 email            : '',
