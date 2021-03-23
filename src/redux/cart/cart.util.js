@@ -1,5 +1,3 @@
-import { bindActionCreators } from "redux";
-
 export const addItemToCart = (cartItems, cartItemToAdd ) => {
 
     const existingCartItem = cartItems.find(
@@ -26,7 +24,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove ) => {
         cartItem => cartItem.id === cartItemToRemove.id 
     );
 
-    if (existingCartItem.quantity == 1) {
+    if (existingCartItem.quantity === 1) {
         return clearItemFormCart(cartItems, cartItemToRemove);
     } else {
 
