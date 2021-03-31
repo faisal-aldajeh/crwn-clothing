@@ -40,6 +40,27 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
    return userRef;
 }
 
+export const convertCollectionsSnapshotToMap = (collections) => 
+{
+   const transFormedCollection = collections.docs.map(
+      doc=> {
+         const {title, items } = doc.data();
+         return {
+            routeName : encodeURI(title.toLowerCase()),
+            id        : doc.id,
+            title,
+            items
+         }
+      } 
+   )
+
+   return transFormedCollection.reduce((accumulator, collection )=> {
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+   },{});
+}
+
+
 
 
 firebase.initializeApp(config);

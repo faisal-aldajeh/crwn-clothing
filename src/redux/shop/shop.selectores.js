@@ -22,26 +22,12 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
     [selectCollections],
-    collections => Object.keys(collections).map(key =>collections[key] )
+    collections => collections ? Object.keys(collections).map(key =>collections[key] ) :[]
 );
 
-// we converts the dhop data to an object with index refers to the collection 
 export const selectCollection = memoize((collectionUrlParam) =>
     createSelector(
         [selectCollections],
-        collections => collections[collectionUrlParam]
+        collections => (collections ? collections[collectionUrlParam] : null)
     )
 );
-
-
-// used when the shop data was an Array 
-
-// export const selectCollection = memoize((collectionUrlParam) =>
-//     createSelector(
-//         [selectCollections],
-//         collections => collections.find(
-//             collection=>
-//             collection.id === COLLECTION_ID_MAP[collectionUrlParam]
-//         )
-//     )
-// );
